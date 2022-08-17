@@ -1,0 +1,137 @@
+// Text Styles
+:root {
+    @mixin head1 {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 35px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin head2 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin title1-700 {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin title1-400 {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin title2-700 {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin title2-400 {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin body1-700 {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin body1-400 {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin body2-700 {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 19px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin body2-400 {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 19px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin body3-700 {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin body3-400 {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: -0.01em;
+    }
+
+    @mixin caption1-700 {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 16px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin caption1-400 {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 16px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin caption2-700 {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin caption2-400 {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin caption3 {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 14px;
+        letter-spacing: -0.015em;
+    }
+
+    @mixin badge {
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 12px;
+        letter-spacing: -0.015em;
+    }
+
+    // Color Styles
+    $kda-3: #2daf7f;
+    $kda-4: #1f8ecd;
+    $kda-5: #e19205;
+    $win-rate-60: #c6443e;
+    $kda-avg-6: #e19205;
+}
+
+
