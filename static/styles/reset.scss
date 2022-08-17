@@ -88,7 +88,8 @@ video {
   padding: 0;
   border: 0;
   vertical-align: baseline;
-  font-family: "Pretendard"
+  font-family: "Apple SD Gothic Neo";
+  box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -135,8 +136,6 @@ img {
 html,
 body {
   font-size: 11px;
-  width: 1080px;
-  margin: auto;
 }
 
 button,
