@@ -2,9 +2,12 @@
     import {page} from '$app/stores';
     import SeasonDashboard from "../../../container/SeasonDashboard.svelte";
     import Leagues from "../../../container/Leagues.svelte";
+    import type {ServerLoad} from "../../../lib/models";
 
     /** @type {import('./$types').PageData} */
-    export let data;
+    export let data: ServerLoad;
+    console.log(data);
+    let {summoner, mostInfo} = data;
     let name = $page.params.name;
     let findName = '';
 
@@ -27,10 +30,10 @@
             </form>
         </div>
     </div>
-    <SeasonDashboard {data}/>
+    <SeasonDashboard {summoner}/>
     <div class="content section-wrap">
         <div class="container left">
-            <Leagues leagues={data.leagues}/>
+            <Leagues leagues={summoner.leagues}/>
         </div>
         <div class="container main">
             main

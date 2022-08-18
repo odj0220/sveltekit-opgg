@@ -1,3 +1,8 @@
+export interface ServerLoad {
+    summoner: Summoner,
+    mostInfo: MostInfo
+}
+
 export interface Summoner {
     ladderRank:	LadderRank
     leagues: League[]

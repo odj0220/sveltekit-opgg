@@ -2,8 +2,9 @@
     import type {Summoner, TierRank} from "../lib/models";
     import ProfileIcon from "../component/ProfileIcon.svelte";
 
-    export let data: Summoner;
-    let previousTiers = data.previousTiers.sort((a: TierRank, b: TierRank) => a.season - b.season);
+    export let summoner: Summoner;
+    let {ladderRank, previousTiers} = summoner;
+    previousTiers = previousTiers.sort((a: TierRank, b: TierRank) => a.season - b.season);
 </script>
 
 <div class="container-wrap">
@@ -17,12 +18,12 @@
             {/each}
         </ul>
         <div class="profile-wrap">
-            <ProfileIcon summoner={data}/>
+            <ProfileIcon {summoner}/>
             <div class="profile">
                 <div class="info">
                     <span class="name">오동진</span>
                     <div class="rank">
-                        래더 랭킹 <span class="ranking">{data.ladderRank.rank.toLocaleString('en-US')}</span>위 (상위 {data.ladderRank.rankPercentOfTop}%)
+                        래더 랭킹 <span class="ranking">{ladderRank.rank.toLocaleString('en-US')}</span>위 (상위 {ladderRank.rankPercentOfTop}%)
                     </div>
                 </div>
             </div>
