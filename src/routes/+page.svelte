@@ -7,19 +7,6 @@
     }
 </script>
 
-<div class="main-img section-wrap">
-    <img src="https://opgg-static.akamaized.net/logo/20220815090917.b3aca19a45e54ad889f8a8ed9cf1dd2d.png?image=q_auto,f_webp,w_auto&amp;v=1660730703413" alt="OP.GG logo (아무무)" title="아무무">
-</div>
-<div class="search-container section-wrap">
-    <form on:submit|preventDefault={handleSubmit}>
-        <label for="searchSummoner" class="hidden">소환사명, 소환사명, ...</label>
-        <input type="text" id="searchSummoner" name="searchSummoner" bind:value={name} placeholder="소환사명,챔피언...">
-        <button type="submit">
-            <img src="https://s-lol-web.op.gg/images/icon/icon-gg-white.svg?v=1660730703413" width="30" alt="search" height="15">
-        </button>
-    </form>
-</div>
-
 <style lang="scss">
     .main-img {
       padding: 32px 0 24px;
@@ -65,3 +52,17 @@
       }
     }
 </style>
+
+
+<div class="main-img section-wrap">
+    <img src="https://opgg-static.akamaized.net/logo/20220815090917.b3aca19a45e54ad889f8a8ed9cf1dd2d.png?image=q_auto,f_webp,w_auto&amp;v=1660730703413" alt="OP.GG logo (아무무)" title="아무무">
+</div>
+<div class="search-container section-wrap">
+    <form on:submit|preventDefault={handleSubmit}>
+        <label for="searchSummoner" class="hidden">소환사명, 소환사명, ...</label>
+        <input type="text" id="searchSummoner" name="searchSummoner" bind:value={name} placeholder="소환사명,챔피언...">
+        <button type="submit">
+            <img src="https://s-lol-web.op.gg/images/icon/icon-gg-white.svg?v=1660730703413" width="30" alt="search" height="15">
+        </button>
+    </form>
+</div>

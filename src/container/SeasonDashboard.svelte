@@ -2,33 +2,10 @@
     import type {Summoner, TierRank} from "../lib/models";
     import ProfileIcon from "../component/ProfileIcon.svelte";
 
-    export let data: Summoner;
-    let previousTiers = data.previousTiers.sort((a: TierRank, b: TierRank) => a.season - b.season);
+    export let summoner: Summoner;
+    let {ladderRank, previousTiers} = summoner;
+    previousTiers = previousTiers.sort((a: TierRank, b: TierRank) => a.season - b.season);
 </script>
-
-<div class="container-wrap">
-    <div class="section-wrap">
-        <ul>
-            {#each previousTiers as preTier}
-            <li title={preTier.string}>
-                <b>S{preTier.season}</b>
-                {preTier.tier}
-            </li>
-            {/each}
-        </ul>
-        <div class="profile-wrap">
-            <ProfileIcon summoner={data}/>
-            <div class="profile">
-                <div class="info">
-                    <span class="name">오동진</span>
-                    <div class="rank">
-                        래더 랭킹 <span class="ranking">{data.ladderRank.rank.toLocaleString('en-US')}</span>위 (상위 {data.ladderRank.rankPercentOfTop}%)
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <style lang="scss">
     .container-wrap {
@@ -80,3 +57,27 @@
       }
     }
 </style>
+
+<div class="container-wrap">
+    <div class="section-wrap">
+        <ul>
+            {#each previousTiers as preTier}
+                <li title={preTier.string}>
+                    <b>S{preTier.season}</b>
+                    {preTier.tier}
+                </li>
+            {/each}
+        </ul>
+        <div class="profile-wrap">
+            <ProfileIcon {summoner}/>
+            <div class="profile">
+                <div class="info">
+                    <span class="name">오동진</span>
+                    <div class="rank">
+                        래더 랭킹 <span class="ranking">{ladderRank.rank.toLocaleString('en-US')}</span>위 (상위 {ladderRank.rankPercentOfTop}%)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
