@@ -41,82 +41,7 @@
     const recentFillLeft = (champion: ChampionWinRate) => {
         return recentRate(champion) < 1 ? 'display: none;' : '';
     }
-
-
-
-
 </script>
-
-<div class="most-wrap">
-    <ul>
-        <li class:active={selectedTab === 'champions'} on:click={() => selectTab('champions')}>챔피언 승률</li>
-        <li class:active={selectedTab === 'recentWinRate'} on:click={() => selectTab('recentWinRate')}>7일간 랭크 승률</li>
-    </ul>
-    <div class="most-content">
-        {#if mostInfo}
-            {#if selectedTab === 'champions'}
-                {#each mostInfo.champions as champion}
-                    <div class="champion-box">
-                        <div class="face">
-                            <img src={champion.imageUrl} alt={champion.name}>
-                        </div>
-                        <div class="info">
-                            <div class="name">{champion.name}</div>
-                            <div class="cs">CS {champion.cs}</div>
-                        </div>
-                        <div class="kda">
-                            <div class="" style="position: relative;">
-                                <div class="rate">{championRate(champion)}: 1 평점</div>
-                            </div>
-                            <div class="detail">
-                                {championKills(champion)} /
-                                {championAssists(champion)} /
-                                {championDeaths(champion)}
-                            </div>
-                        </div>
-                        <div class="played">
-                            <div class="" style="position: relative;">
-                                <div class="rate">{(champion.wins / champion.games * 100).toFixed(0)}%</div>
-                            </div>
-                            <div class="count">{champion.games} 게임</div>
-                        </div>
-                    </div>
-                {/each}
-            {/if}
-            {#if selectedTab === 'recentWinRate'}
-                {#each mostInfo.recentWinRate as champion}
-                    <div class="recent-box">
-                        <div class="face">
-                            <img src={champion.imageUrl} alt={champion.name}>
-                        </div>
-                        <div class="info">
-                            <div class="name">{champion.name}</div>
-                        </div>
-                        <div class="winratio">{recentRate(champion)} %</div>
-                        <div class="graph">
-                            <div class="graph-container">
-                                <div class="fill left" style="width: {recentRate(champion)}%;{recentFillLeft}"></div>
-                                <div class="text left">{champion.wins}승</div>
-                                <div class="fill right"></div>
-                                <div class="text right">{champion.losses}패</div>
-                                <div class="bar" style="width: {recentRate(champion)}%; {recentDisplayBar(champion)}"></div>
-                            </div>
-                        </div>
-                    </div>
-                {/each}
-            {/if}
-
-        {/if}
-        {#if !mostInfo}
-            <div class="spinner-container">
-                <Spinner/>
-            </div>
-        {/if}
-    </div>
-
-
-</div>
-
 
 <style lang="scss">
   .most-wrap {
@@ -382,3 +307,72 @@
     }
   }
 </style>
+
+<div class="most-wrap">
+    <ul>
+        <li class:active={selectedTab === 'champions'} on:click={() => selectTab('champions')}>챔피언 승률</li>
+        <li class:active={selectedTab === 'recentWinRate'} on:click={() => selectTab('recentWinRate')}>7일간 랭크 승률</li>
+    </ul>
+    <div class="most-content">
+        {#if mostInfo}
+            {#if selectedTab === 'champions'}
+                {#each mostInfo.champions as champion}
+                    <div class="champion-box">
+                        <div class="face">
+                            <img src={champion.imageUrl} alt={champion.name}>
+                        </div>
+                        <div class="info">
+                            <div class="name">{champion.name}</div>
+                            <div class="cs">CS {champion.cs}</div>
+                        </div>
+                        <div class="kda">
+                            <div class="" style="position: relative;">
+                                <div class="rate">{championRate(champion)}: 1 평점</div>
+                            </div>
+                            <div class="detail">
+                                {championKills(champion)} /
+                                {championAssists(champion)} /
+                                {championDeaths(champion)}
+                            </div>
+                        </div>
+                        <div class="played">
+                            <div class="" style="position: relative;">
+                                <div class="rate">{(champion.wins / champion.games * 100).toFixed(0)}%</div>
+                            </div>
+                            <div class="count">{champion.games} 게임</div>
+                        </div>
+                    </div>
+                {/each}
+            {/if}
+            {#if selectedTab === 'recentWinRate'}
+                {#each mostInfo.recentWinRate as champion}
+                    <div class="recent-box">
+                        <div class="face">
+                            <img src={champion.imageUrl} alt={champion.name}>
+                        </div>
+                        <div class="info">
+                            <div class="name">{champion.name}</div>
+                        </div>
+                        <div class="winratio">{recentRate(champion)} %</div>
+                        <div class="graph">
+                            <div class="graph-container">
+                                <div class="fill left" style="width: {recentRate(champion)}%;{recentFillLeft}"></div>
+                                <div class="text left">{champion.wins}승</div>
+                                <div class="fill right"></div>
+                                <div class="text right">{champion.losses}패</div>
+                                <div class="bar" style="width: {recentRate(champion)}%; {recentDisplayBar(champion)}"></div>
+                            </div>
+                        </div>
+                    </div>
+                {/each}
+            {/if}
+
+        {/if}
+        {#if !mostInfo}
+            <div class="spinner-container">
+                <Spinner/>
+            </div>
+        {/if}
+    </div>
+
+</div>

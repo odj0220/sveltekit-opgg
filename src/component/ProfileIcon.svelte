@@ -4,12 +4,6 @@
     export let summoner: Summoner;
 </script>
 
-<div class="profile-icon">
-    <div class="border-image" style="background-image:url({summoner.profileBorderImageUrl})"></div>
-    <img src="{summoner.profileImageUrl}" alt="profile image">
-    <span class="level">{summoner.level}</span>
-</div>
-
 <style lang="scss">
   .profile-icon {
     position: relative;
@@ -55,3 +49,9 @@
     }
   }
 </style>
+
+<div class="profile-icon">
+    <div class="border-image" style="background-image:url({summoner.profileBorderImageUrl})"></div>
+    <img src="{summoner.profileImageUrl}" alt="profile image">
+    <span class="level">{summoner.level}</span>
+</div>

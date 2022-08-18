@@ -1,7 +1,3 @@
-<div class="spinner-wrapper">
-    <div class="spinner"></div>
-</div>
-
 <style lang="scss">
   .spinner-wrapper {
     display: flex;
@@ -24,3 +20,7 @@
     }
   }
 </style>
+
+<div class="spinner-wrapper">
+    <div class="spinner"></div>
+</div>

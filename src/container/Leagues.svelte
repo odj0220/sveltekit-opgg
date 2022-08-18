@@ -4,11 +4,6 @@
     export let leagues: League[];
 </script>
 
-<div class="leagues-container">
-    <LeagueComponent league={leagues[0]}/>
-    <LeagueComponent league={leagues[1]}/>
-</div>
-
 <style lang="scss">
     .leagues-container {
       display: flex;
@@ -17,3 +12,8 @@
       flex-direction: column;
     }
 </style>
+
+<div class="leagues-container">
+    <LeagueComponent league={leagues[0]}/>
+    <LeagueComponent league={leagues[1]}/>
+</div>

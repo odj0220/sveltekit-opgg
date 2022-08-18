@@ -19,31 +19,6 @@
     }
 </script>
 
-<div class="page">
-    <div class="header">
-        <div class="section-wrap">
-            <form class="search-container" on:submit|preventDefault={handleSubmit}>
-                <label for="searchSummoner" class="hidden">소환사명, 소환사명, ...</label>
-                <input id="searchSummoner" name="searchSummoner" type="text" bind:value={findName} placeholder="소환사명, 챔피언...">
-                <button type="submit">
-                    <img src="https://s-lol-web.op.gg/images/icon/icon-gg.svg?v=1660730703228" alt="search" height="14">
-                </button>
-            </form>
-        </div>
-    </div>
-    <SeasonDashboard {summoner}/>
-    <div class="content section-wrap">
-        <div class="container left">
-            <Leagues leagues={summoner.leagues}/>
-            <MostInfoContainer {mostInfo} {name}/>
-        </div>
-        <div class="container main">
-            main
-        </div>
-    </div>
-</div>
-
-
 <style lang="scss">
     .page {
       background: #eaeaea;
@@ -114,3 +89,26 @@
     }
 </style>
 
+<div class="page">
+    <div class="header">
+        <div class="section-wrap">
+            <form class="search-container" on:submit|preventDefault={handleSubmit}>
+                <label for="searchSummoner" class="hidden">소환사명, 소환사명, ...</label>
+                <input id="searchSummoner" name="searchSummoner" type="text" bind:value={findName} placeholder="소환사명, 챔피언...">
+                <button type="submit">
+                    <img src="https://s-lol-web.op.gg/images/icon/icon-gg.svg?v=1660730703228" alt="search" height="14">
+                </button>
+            </form>
+        </div>
+    </div>
+    <SeasonDashboard {summoner}/>
+    <div class="content section-wrap">
+        <div class="container left">
+            <Leagues leagues={summoner.leagues}/>
+            <MostInfoContainer {mostInfo} {name}/>
+        </div>
+        <div class="container main">
+            main
+        </div>
+    </div>
+</div>

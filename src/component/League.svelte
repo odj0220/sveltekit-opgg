@@ -8,36 +8,6 @@
     const lankTier = `${tierRank.tier} ${tierRank.shortString.replace(/[^0-9]/g, '')}`
 </script>
 
-<div class="wrapper">
-    {#if league.hasResults}
-        <div class="medal">
-            <div class="medal-wrap">
-                <img src={league.tierRank.imageUrl} alt={league.tierRank.tier}>
-            </div>
-        </div>
-        <div class="info">
-            <div class="type">{league.tierRank.name}</div>
-            <div class="tier-rank">{lankTier}</div>
-            <div class="tier-info">
-                <span class="lp">{tierRank.lp} LP</span> /
-                <span class="win-lose">{wins}승 {losses}패<br>승률 {rate}%</span>
-            </div>
-            <div class="league-name">트위치의 불한당들</div>
-        </div>
-    {/if}
-    {#if !league.hasResults}
-        <div class="medal">
-            <div class="medal-wrap">
-                <img class="unranked" src="/images/unranked.png" alt="unranked">
-            </div>
-        </div>
-        <div class="info">
-            <div class="type">{league.tierRank.name}</div>
-            <div class="tier-rank unranked">Unranked</div>
-        </div>
-    {/if}
-</div>
-
 <style lang="scss">
   .wrapper {
     border: 1px solid #cdd2d2;
@@ -103,3 +73,33 @@
     }
   }
 </style>
+
+<div class="wrapper">
+    {#if league.hasResults}
+        <div class="medal">
+            <div class="medal-wrap">
+                <img src={league.tierRank.imageUrl} alt={league.tierRank.tier}>
+            </div>
+        </div>
+        <div class="info">
+            <div class="type">{league.tierRank.name}</div>
+            <div class="tier-rank">{lankTier}</div>
+            <div class="tier-info">
+                <span class="lp">{tierRank.lp} LP</span> /
+                <span class="win-lose">{wins}승 {losses}패<br>승률 {rate}%</span>
+            </div>
+            <div class="league-name">트위치의 불한당들</div>
+        </div>
+    {/if}
+    {#if !league.hasResults}
+        <div class="medal">
+            <div class="medal-wrap">
+                <img class="unranked" src="/images/unranked.png" alt="unranked">
+            </div>
+        </div>
+        <div class="info">
+            <div class="type">{league.tierRank.name}</div>
+            <div class="tier-rank unranked">Unranked</div>
+        </div>
+    {/if}
+</div>
