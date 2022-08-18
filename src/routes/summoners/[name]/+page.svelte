@@ -3,6 +3,7 @@
     import SeasonDashboard from "../../../container/SeasonDashboard.svelte";
     import Leagues from "../../../container/Leagues.svelte";
     import type {ServerLoad} from "../../../lib/models";
+    import MostInfoContainer from "../../../container/MostInfoContainer.svelte";
 
     /** @type {import('./$types').PageData} */
     export let data: ServerLoad;
@@ -34,6 +35,7 @@
     <div class="content section-wrap">
         <div class="container left">
             <Leagues leagues={summoner.leagues}/>
+            <MostInfoContainer {mostInfo} {name}/>
         </div>
         <div class="container main">
             main
