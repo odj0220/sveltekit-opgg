@@ -1,8 +1,13 @@
 <script lang="ts">
     import {page} from '$app/stores';
+    import SeasonDashboard from "../../../container/SeasonDashboard.svelte";
 
+    /** @type {import('./$types').PageData} */
+    export let data;
     let name = $page.params.name;
     let findName = '';
+
+    console.log(data);
 
     function handleSubmit() {
         if (findName) {
@@ -23,9 +28,13 @@
             </form>
         </div>
     </div>
+    <SeasonDashboard {data}/>
     <div class="content section-wrap">
-        <div class="section-wrap">
-            dsfsadf
+        <div class="container left">
+            left
+        </div>
+        <div class="container main">
+            main
         </div>
     </div>
 </div>
@@ -83,9 +92,20 @@
           }
         }
       }
+
       .content {
-        width: 100%;
-        height: 100%;
+        display: flex;
+        padding: 10px 0;
+        gap: 10px;
+
+        .container {
+          &.left {
+            width: 300px;
+          }
+          &.main {
+            flex: 1;
+          }
+        }
       }
     }
 </style>
