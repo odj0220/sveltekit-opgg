@@ -1,13 +1,12 @@
 <script lang="ts">
     import {page} from '$app/stores';
     import SeasonDashboard from "../../../container/SeasonDashboard.svelte";
+    import Leagues from "../../../container/Leagues.svelte";
 
     /** @type {import('./$types').PageData} */
     export let data;
     let name = $page.params.name;
     let findName = '';
-
-    console.log(data);
 
     function handleSubmit() {
         if (findName) {
@@ -31,7 +30,7 @@
     <SeasonDashboard {data}/>
     <div class="content section-wrap">
         <div class="container left">
-            left
+            <Leagues leagues={data.leagues}/>
         </div>
         <div class="container main">
             main
