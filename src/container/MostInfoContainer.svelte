@@ -2,6 +2,7 @@
     import Spinner from "../component/Spinner.svelte";
     import type {MostInfo} from "../lib/models";
     import {MostInfo as getMostInfo} from "../lib/_api";
+    import type {ChampionWinRate, MostChampion} from "../lib/models";
 
     export let mostInfo: MostInfo;
     export let name: string;
@@ -12,6 +13,37 @@
         mostInfo = null;
         mostInfo = await getMostInfo(name);
     }
+
+    const championRate = (champion: MostChampion) => {
+        return +((champion.kills + champion.assists) / champion.deaths).toFixed(2);
+    }
+
+    const championKills = (champion: MostChampion) => {
+        return +(champion.kills/champion.games).toFixed(2);
+    }
+
+    const championAssists = (champion: MostChampion) => {
+        return +(champion.assists/champion.games).toFixed(2);
+    }
+
+    const championDeaths = (champion: MostChampion) => {
+        return +(champion.deaths/champion.games).toFixed(2);
+    }
+
+    const recentRate = (champion: ChampionWinRate) => {
+        return +(champion.wins / (champion.wins + champion.losses) * 100).toFixed(0);
+    }
+
+    const recentDisplayBar = (champion: ChampionWinRate) => {
+        return (recentRate(champion) < 1 || recentRate(champion) > 99) ? 'display: none;' : '';
+    }
+
+    const recentFillLeft = (champion: ChampionWinRate) => {
+        return recentRate(champion) < 1 ? 'display: none;' : '';
+    }
+
+
+
 
 </script>
 
@@ -34,12 +66,12 @@
                         </div>
                         <div class="kda">
                             <div class="" style="position: relative;">
-                                <div class="rate">{+((champion.kills + champion.assists) / champion.deaths).toFixed(2)}: 1 평점</div>
+                                <div class="rate">{championRate(champion)}: 1 평점</div>
                             </div>
                             <div class="detail">
-                                {+(champion.kills/champion.games).toFixed(2)} /
-                                {+(champion.assists/champion.games).toFixed(2)} /
-                                {+(champion.deaths/champion.games).toFixed(2)}
+                                {championKills(champion)} /
+                                {championAssists(champion)} /
+                                {championDeaths(champion)}
                             </div>
                         </div>
                         <div class="played">
@@ -52,7 +84,26 @@
                 {/each}
             {/if}
             {#if selectedTab === 'recentWinRate'}
-
+                {#each mostInfo.recentWinRate as champion}
+                    <div class="recent-box">
+                        <div class="face">
+                            <img src={champion.imageUrl} alt={champion.name}>
+                        </div>
+                        <div class="info">
+                            <div class="name">{champion.name}</div>
+                        </div>
+                        <div class="winratio">{recentRate(champion)} %</div>
+                        <div class="graph">
+                            <div class="graph-container">
+                                <div class="fill left" style="width: {recentRate(champion)}%;{recentFillLeft}"></div>
+                                <div class="text left">{champion.wins}승</div>
+                                <div class="fill right"></div>
+                                <div class="text right">{champion.losses}패</div>
+                                <div class="bar" style="width: {recentRate(champion)}%; {recentDisplayBar(champion)}"></div>
+                            </div>
+                        </div>
+                    </div>
+                {/each}
             {/if}
 
         {/if}
@@ -93,6 +144,10 @@
         font-size: 12px;
         line-height: 15px;
         text-decoration: none;
+
+        &:first-child {
+          border-left: none;
+        }
 
         &.active {
           border-bottom: 1px solid #ededed;
@@ -190,7 +245,132 @@
             white-space: nowrap;
           }
         }
+      }
 
+      .recent-box {
+        display: table;
+        width: 100%;
+        border-bottom: 1px solid #cdd2d2;
+        background: #ededed;
+        color: #879292;
+        text-align: center;
+        font-size: 12px;
+        table-layout: fixed;
+
+        .face {
+          display: table-cell;
+          width: 44px;
+          padding: 5px 0 0 0;
+          text-align: right;
+          vertical-align: middle;
+
+          img {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+          }
+        }
+
+        .info {
+          display: table-cell;
+          width: 61px;
+          text-align: left;
+          vertical-align: middle;
+
+          .name {
+            width: 100%;
+            margin-left: 10px;
+            color: #555e5e;
+            font-weight: bold;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-decoration: none;
+          }
+        }
+
+        .winratio {
+          display: table-cell;
+          width: 40px;
+          vertical-align: middle;
+        }
+
+        .graph {
+          display: table-cell;
+          height: 40px;
+          vertical-align: middle;
+          padding-left: 6px;
+          padding-right: 12px;
+
+          .graph-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 20px;
+            vertical-align: middle;
+
+            .fill {
+              position: absolute;
+              left: 0;
+              top: -1px;
+              display: inline-block;
+              vertical-align: middle;
+              height: 100%;
+              border-radius: 3px;
+
+              &.left {
+                display: block;
+                width: 100%;
+                z-index: 2;
+                background: #3d95e5;
+                border: 1px solid #3480c6;
+              }
+
+              &.right {
+                width: 100%;
+                z-index: 1;
+                background: #ee5a52;
+                border: 1px solid #c6443e;
+              }
+            }
+
+            .text {
+              position: absolute;
+              top: 0;
+              height: 100%;
+              font-size: 11px;
+              z-index: 3;
+              color: #f2f2f2;
+              line-height: 22px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              &.left {
+                display: block;
+                left: 6px;
+                text-align: left;
+              }
+
+              &.right {
+                display: block;
+                right: 5px;
+                text-align: right;
+              }
+            }
+
+            .bar {
+              position: absolute;
+              top: 0;
+              width: 100%;
+              height: calc(100% - 2px);
+              border-left: 1px solid #1a78ae;
+              border-right: 1px solid #c6443e;
+              z-index: 2;
+            }
+          }
+        }
       }
 
       .spinner-container {
