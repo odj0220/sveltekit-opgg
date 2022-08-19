@@ -1,15 +1,43 @@
 <script lang="ts">
     import type {Champion, Matches, Position} from "../lib/models";
+    import {onMount} from "svelte";
+    declare const djchart;
+
+    onMount(() => {
+        renderChart();
+    })
 
     export let matches: Matches;
+    let chart;
     const {summary, positions, games, champions} = matches;
     const gameCnt = summary.wins + summary.losses;
-
     const avgKill = (summary.kills / gameCnt).toFixed(1);
     const avgDeath = (summary.deaths / gameCnt).toFixed(1);
     const avgAssist = (summary.assists / gameCnt).toFixed(1);
     const kdaRatio = ((summary.kills + summary.assists) / summary.deaths).toFixed(2);
     const winsRatio = +((summary.wins / gameCnt) * 100).toFixed(0);
+
+    const renderChart = () => {
+        chart = new djchart.PieChart("#recharts-wrapper");
+        const rednerData = {
+            all: () => ([
+                { key: 'losses', value: summary.losses},
+                { key: 'wins', value: summary.wins}
+            ])
+        };
+
+        chart
+            .width(90)
+            .height(90)
+            .innerRadius(30)
+            .dimension({})
+            .group(rednerData)
+            .ordering(djchart.pluck('key'))
+            .ordinalColors(['#ee5a52', '#1f8ecd']);
+
+        chart.render();
+    }
+
     const kdaRatioColor = (kdaRatio: number) => {
         if (+kdaRatio >= 5) {
             return '#e19205';
@@ -71,6 +99,11 @@
 </script>
 
 <style lang="scss">
+    :global {
+      .dc-chart .pie-label-group{
+        display: none;
+      }
+    }
     .component-wrap {
       margin-top: -1px;
       box-sizing: border-box;
@@ -388,37 +421,7 @@
         <tr>
             <td class="summary">
                 <div class="chart">
-                    <div class="recharts-wrapper">
-                        <svg class="recharts-surface" width="90" height="90" viewBox="0 0 90 90" version="1.1">
-                            <defs>
-                                <clipPath id="recharts11-clip">
-                                    <rect x="5" y="5" height="80" width="80"></rect>
-                                </clipPath>
-                            </defs>
-                            <g class="recharts-layer recharts-pie">
-                                <g class="recharts-layer recharts-pie-sector">
-                                    <path stroke="none" fill="#ee5a52" color="#ee5a52" class="recharts-sector" d="M 45,0
-    A 45,45,0,
-    1,1,
-    18.549663646838713,81.40576474687263
-  L 27.36644243122581,69.27050983124843
-            A 30,30,0,
-            1,0,
-            45,15 Z"></path>
-                                </g>
-                                <g class="recharts-layer recharts-pie-sector">
-                                    <path stroke="none" fill="#1f8ecd" color="#1f8ecd" class="recharts-sector" d="M 18.549663646838713,81.40576474687263
-    A 45,45,0,
-    0,1,
-    44.99999999999999,0
-  L 44.99999999999999,15
-            A 30,30,0,
-            0,0,
-            27.36644243122581,69.27050983124843 Z"></path>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
+                    <div class="recharts-wrapper" id="recharts-wrapper"></div>
                     <div class="text">{winsRatio}%</div>
                 </div>
             </td>
