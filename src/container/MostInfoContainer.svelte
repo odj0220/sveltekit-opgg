@@ -8,10 +8,23 @@
     export let name: string;
     let selectedTab = 'champions';
 
+    const mostInfoInit = async () => {
+        if (!mostInfo) {
+            mostInfo = await getMostInfo(name);
+        }
+        let {champions, recentWinRate} = mostInfo;
+        champions = champions.sort((a: MostChampion, b: MostChampion) => b.games - a.games);
+        recentWinRate = recentWinRate.sort((a: ChampionWinRate, b: ChampionWinRate) => (b.wins + b.losses) - (a.wins + a.losses));
+        mostInfo = {
+            champions,
+            recentWinRate
+        }
+    };
+
     const selectTab = async (tab: string) => {
         selectedTab = tab;
         mostInfo = null;
-        mostInfo = await getMostInfo(name);
+        await mostInfoInit();
     }
 
     const championRate = (champion: MostChampion) => {
