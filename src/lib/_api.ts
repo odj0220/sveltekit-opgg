@@ -26,6 +26,12 @@ export const SummonerInfo = (summonerName: string) => {
 export const MostInfo =  (summonerName: string) => {
     return GET(`/api/summoner/${summonerName}/mostInfo`, {params: {hl: 'ko'}})
 }
+
+export const Matches = (summonerName: string) => {
+    return GET(`/api/summoner/${summonerName}/matches`, {params: {hl: 'ko'}})
+}
+
+
 export const restApi = (url: string, option: fetchOption) => {
     let params = '';
     let requestUrl = `${API_HOST}${url}`;

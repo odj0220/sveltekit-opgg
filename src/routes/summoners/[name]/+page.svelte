@@ -4,11 +4,12 @@
     import Leagues from "../../../container/Leagues.svelte";
     import type {ServerLoad} from "../../../lib/models";
     import MostInfoContainer from "../../../container/MostInfoContainer.svelte";
+    import MatchesContainer from "../../../container/MatchesContainer.svelte";
 
     /** @type {import('./$types').PageData} */
     export let data: ServerLoad;
     console.log(data);
-    let {summoner, mostInfo} = data;
+    let {summoner, mostInfo, matches} = data;
     let name = $page.params.name;
     let findName = '';
 
@@ -108,7 +109,7 @@
             <MostInfoContainer {mostInfo} {name}/>
         </div>
         <div class="container main">
-            main
+            <MatchesContainer {matches} {name}/>
         </div>
     </div>
 </div>
