@@ -43,15 +43,15 @@
     }
 
     const championKills = (champion: MostChampion) => {
-        return +(champion.kills/champion.games).toFixed(2);
+        return (champion.kills/champion.games).toFixed(1);
     }
 
     const championAssists = (champion: MostChampion) => {
-        return +(champion.assists/champion.games).toFixed(2);
+        return (champion.assists/champion.games).toFixed(1);
     }
 
     const championDeaths = (champion: MostChampion) => {
-        return +(champion.deaths/champion.games).toFixed(2);
+        return (champion.deaths/champion.games).toFixed(1);
     }
 
     const recentRate = (champion: ChampionWinRate) => {
