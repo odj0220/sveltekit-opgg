@@ -18,6 +18,30 @@
         return +((champion.kills + champion.assists) / champion.deaths).toFixed(2);
     }
 
+    const championKdaColor = (champion: MostChampion) => {
+        if (championRate(champion) >= 5) {
+            return '#e19205';
+        }
+        if (championRate(champion) >= 4) {
+            return '#1f8ecd';
+        }
+        if (championRate(champion) >= 3) {
+            return '#2daf7f';
+        }
+        return '#5e5e5e';
+    }
+
+    const championWinsRate = (champion: MostChampion) => {
+        return +(champion.wins / champion.games * 100).toFixed(0);
+    }
+
+    const championWinsRateColor = (champion: MostChampion) => {
+        if (championWinsRate(champion) >= 60) {
+            return '#c6443e';
+        }
+        return '#5e5e5e';
+    }
+
     const championKills = (champion: MostChampion) => {
         return +(champion.kills/champion.games).toFixed(2);
     }
@@ -327,7 +351,7 @@
                         </div>
                         <div class="kda">
                             <div class="" style="position: relative;">
-                                <div class="rate">{championRate(champion)}: 1 평점</div>
+                                <div class="rate" style="color: {championKdaColor(champion)};">{championRate(champion)}: 1 평점</div>
                             </div>
                             <div class="detail">
                                 {championKills(champion)} /
@@ -337,7 +361,7 @@
                         </div>
                         <div class="played">
                             <div class="" style="position: relative;">
-                                <div class="rate">{(champion.wins / champion.games * 100).toFixed(0)}%</div>
+                                <div class="rate" style="color: {championWinsRateColor(champion)}">{championWinsRate(champion)}%</div>
                             </div>
                             <div class="count">{champion.games} 게임</div>
                         </div>
