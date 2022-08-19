@@ -4,6 +4,8 @@ export interface ServerLoad {
     matches: Matches
 }
 
+export type GameTypes = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED';
+
 export interface Summoner {
     ladderRank:	LadderRank
     leagues: League[]

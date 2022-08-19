@@ -3,11 +3,12 @@
     import MatchesStatus from "../component/MatchesStatus.svelte";
     import {Matches} from "../lib/_api";
     import Spinner from "../component/Spinner.svelte";
+    import MatchesListContainer from "./MatchesListContainer.svelte";
+    import type {GameTypes} from "../lib/models";
 
     export let matches;
     export let name;
 
-    type GameTypes = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED';
     let selectedType: GameTypes = 'SOLORANKED';
 
     const selectType = async (type: GameTypes) => {
@@ -72,6 +73,7 @@
     </div>
     {#if matches}
         <MatchesStatus {matches}/>
+        <MatchesListContainer {matches} {selectedType}/>
     {/if}
 
     {#if !matches}
