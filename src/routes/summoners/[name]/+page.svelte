@@ -8,7 +8,7 @@
     /** @type {import('./$types').PageData} */
     export let data: ServerLoad;
     console.log(data);
-    let {summoner, mostInfo} = data;
+    let {summoner, mostInfo, matches} = data;
     let name = $page.params.name;
     let findName = '';
 
