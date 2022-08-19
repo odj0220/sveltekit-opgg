@@ -109,7 +109,7 @@
             <MostInfoContainer {mostInfo} {name}/>
         </div>
         <div class="container main">
-            <MatchesContainer {matches}/>
+            <MatchesContainer {matches} {name}/>
         </div>
     </div>
 </div>

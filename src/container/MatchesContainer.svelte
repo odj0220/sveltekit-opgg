@@ -1,11 +1,19 @@
 <script lang="ts">
 
+    import MatchesStatus from "../component/MatchesStatus.svelte";
+    import {Matches} from "../lib/_api";
+    import Spinner from "../component/Spinner.svelte";
+
     export let matches;
+    export let name;
+
     type GameTypes = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED';
     let selectedType: GameTypes = 'SOLORANKED';
 
-    const selectType = (type: GameTypes) => {
+    const selectType = async (type: GameTypes) => {
         selectedType = type;
+        matches = null;
+        matches = await Matches(name);
     }
 
 </script>
@@ -44,6 +52,14 @@
       }
     }
   }
+
+  .spinner-container {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 </style>
 
 <div class="container-wrap">
@@ -54,5 +70,13 @@
             <li class:active={selectedType === 'FLEXRANKED'} on:click={() => selectType('FLEXRANKED')}>자유랭크</li>
         </ul>
     </div>
+    {#if matches}
+        <MatchesStatus {matches}/>
+    {/if}
 
+    {#if !matches}
+        <div class="spinner-container">
+            <Spinner/>
+        </div>
+    {/if}
 </div>

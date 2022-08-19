@@ -73,6 +73,15 @@ export interface ChampionWinRate {
 export interface Champion {
     imageUrl: string
     level: number
+    assists: number
+    deaths: number
+    games: number
+    id: number
+    key: string
+    kills: number
+    losses: number
+    name: string
+    wins: number
 }
 
 export interface ImageObj {
