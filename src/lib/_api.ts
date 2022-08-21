@@ -1,3 +1,4 @@
+import type {GameInfo, MatchDetail, Team} from "./models";
 
 const API_HOST = 'https://codingtest.op.gg';
 
@@ -27,8 +28,20 @@ export const MostInfo =  (summonerName: string) => {
     return GET(`/api/summoner/${summonerName}/mostInfo`, {params: {hl: 'ko'}})
 }
 
-export const Matches = (summonerName: string) => {
-    return GET(`/api/summoner/${summonerName}/matches`, {params: {hl: 'ko'}})
+export const Matches = async (summonerName: string) => {
+    const matches = await GET(`/api/summoner/${summonerName}/matches`, {params: {hl: 'ko'}});
+    const matchDetailPromises = matches.games.map((game: GameInfo) => MatchDetail(summonerName, game.gameId));
+    const matchDetails = (await Promise.allSettled(matchDetailPromises)).filter((res: any) => res.status === 'fulfilled')
+        .map((res: any) => res.value);
+    matches.games.forEach((game: GameInfo) => {
+        const team = matchDetails.find((detail: MatchDetail) => detail.gameId === game.gameId).teams;
+        game.teams = team.sort((a: Team, b: Team) => a.teamId - b.teamId);
+    })
+    return matches
+}
+
+const MatchDetail = (summonerName: string, gameId: string) => {
+    return GET(`/api/summoner/${summonerName}/matchDetail/${gameId}`, {params: {hl: 'ko'}})
 }
 
 
