@@ -4,6 +4,8 @@ export interface ServerLoad {
     matches: Matches
 }
 
+export type GameTypes = 'TOTAL' | 'SOLORANKED' | 'FLEXRANKED';
+
 export interface Summoner {
     ladderRank:	LadderRank
     leagues: League[]
@@ -134,6 +136,7 @@ export interface GameInfo {
     summonerId: string
     summonerName: string
     tierRankShort: string
+    teams?: Team[]
 }
 
 export interface Position{
@@ -157,5 +160,21 @@ export interface Matches {
     games: GameInfo[]
     positions: Position[]
     summary: Summary
+}
+
+export interface FellowPlayer {
+    champion: Champion
+    summonerId: string
+    summonerName: string
+}
+
+export interface Team {
+    players: FellowPlayer[]
+    teamId:	number
+}
+
+export interface MatchDetail {
+    gameId:	string
+    teams:	Team[]
 }
 

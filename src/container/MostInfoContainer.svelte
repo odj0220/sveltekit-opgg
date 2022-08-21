@@ -3,10 +3,15 @@
     import type {MostInfo} from "../lib/models";
     import {MostInfo as getMostInfo} from "../lib/_api";
     import type {ChampionWinRate, MostChampion} from "../lib/models";
+    import {onMount} from "svelte";
 
     export let mostInfo: MostInfo;
     export let name: string;
     let selectedTab = 'champions';
+
+    onMount(() => {
+        mostInfoInit();
+    })
 
     const mostInfoInit = async () => {
         if (!mostInfo) {
