@@ -3,7 +3,7 @@
     import ProfileIcon from "../component/ProfileIcon.svelte";
 
     export let summoner: Summoner;
-    let {ladderRank, previousTiers} = summoner;
+    let {ladderRank, previousTiers, name} = summoner;
     previousTiers = previousTiers.sort((a: TierRank, b: TierRank) => a.season - b.season);
 </script>
 
@@ -72,7 +72,7 @@
             <ProfileIcon {summoner}/>
             <div class="profile">
                 <div class="info">
-                    <span class="name">오동진</span>
+                    <span class="name">{name}</span>
                     <div class="rank">
                         래더 랭킹 <span class="ranking">{ladderRank.rank.toLocaleString('en-US')}</span>위 (상위 {ladderRank.rankPercentOfTop}%)
                     </div>
