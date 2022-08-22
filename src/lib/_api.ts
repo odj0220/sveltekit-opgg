@@ -64,7 +64,6 @@ export const restApi = (url: string, option: fetchOption) => {
         body: option.body ? JSON.stringify(option.body) : null,
     })
         .then(res => {
-            console.log(res.status);
             if (option.responseType === 'text') {
                 return res.text();
             }
