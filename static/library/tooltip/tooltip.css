@@ -13,6 +13,11 @@
   opacity: 1;
   font-family: Helvetica;
 }
+
+.tooltip-container a {
+  color: white;
+  text-decoration: none;
+}
 .tooltip-container[class*=" tooltip-"] {
   -webkit-animation: tooltip-anim 0.8s;
   animation: tooltip-anim 0.8s;

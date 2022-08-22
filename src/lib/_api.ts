@@ -40,6 +40,11 @@ export const Matches = async (summonerName: string) => {
     return matches
 }
 
+export const GetItems = () => {;
+    return fetch('http://ddragon.leagueoflegends.com/cdn/10.15.1/data/ko_KR/item.json')
+        .then (res => res.json());
+}
+
 const MatchDetail = (summonerName: string, gameId: string) => {
     return GET(`/api/summoner/${summonerName}/matchDetail/${gameId}`, {params: {hl: 'ko'}})
 }
@@ -59,6 +64,7 @@ export const restApi = (url: string, option: fetchOption) => {
         body: option.body ? JSON.stringify(option.body) : null,
     })
         .then(res => {
+            console.log(res.status);
             if (option.responseType === 'text') {
                 return res.text();
             }
