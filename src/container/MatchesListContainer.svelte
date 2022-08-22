@@ -1,6 +1,9 @@
 <script lang="ts">
     import type {GameInfo, GameTypes, Matches} from "../lib/models";
     import {getTimeStringSeconds, timeForToday} from "../lib/_util";
+    import Tooltip from "../component/Tooltip.svelte";
+    import {get} from 'svelte/store';
+    import {items} from "../lib/stores";
 
     export let matches: Matches;
     export let selectedType: GameTypes;
@@ -41,6 +44,26 @@
         }
         return 'https://s-lol-web.op.gg/static/images/icon/common/icon-viewdetail-red.png?v=1660968209040';
     }
+
+    const getItemTooltip = (imageUrl: string, ward = false) => {
+        const split = imageUrl.split('/');
+        const itemId = split[split.length - 1].split('.')[0];
+        const item = get(items).data[itemId];
+        const html = `
+            <div style="color: ${ward ? '#ffc659' : '#00cfbc'}; font-weight: bold">${item.name}</div>
+            <br>
+            <div>${item.description}</div>
+            <br>
+            <div>가격: <span style="color: #ffc659;">${item.gold.total} (${item.gold.base})</span></div>
+        `;
+        return html;
+    }
+
+    const getItemForId = async (id: string) => {
+        return
+    };
+
+
 
 </script>
 
@@ -474,9 +497,11 @@
                             <ul>
                                 {#each Array(6) as _, index (index)}
                                     <li>
-                                        {#if game.items[index]}
+                                        {#if game.items.length - 1 > index}
                                             <div style="position:relative">
-                                                <img src={game.items[index].imageUrl}>
+                                                <Tooltip tooltip={getItemTooltip(game.items[index].imageUrl)}>
+                                                    <img src={game.items[index].imageUrl}>
+                                                </Tooltip>
                                             </div>
                                         {/if}
                                     </li>
@@ -484,15 +509,17 @@
                             </ul>
                             <div>
                                 <div class="ward">
-                                    <div style="position:relative" class=""><img
-                                            src="https://opgg-static.akamaized.net/images/lol/item/3364.png?image=q_auto,f_webp,w_auto&amp;v=1660889005277"
-                                            alt="예언자의 렌즈"></div>
+                                    <div style="position:relative" class="">
+                                        <Tooltip tooltip={getItemTooltip(game.items[game.items.length - 1].imageUrl, true)}>
+                                            <img src={game.items[game.items.length - 1].imageUrl}>
+                                        </Tooltip>
+                                    </div>
                                 </div>
                                 <div class="build">
                                     <div style="position:relative" class="">
-                                        <button>
+                                        <Tooltip tooltip="빌드">
                                             <img src={getBuildIcon(game.isWin)} alt="build">
-                                        </button>
+                                        </Tooltip>
                                     </div>
                                 </div>
                             </div>

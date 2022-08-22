@@ -6,6 +6,8 @@
     import MatchesListContainer from "./MatchesListContainer.svelte";
     import type {GameTypes} from "../lib/models";
 
+    declare const tooltip;
+
     export let matches;
     export let name;
 
@@ -15,6 +17,9 @@
         selectedType = type;
         matches = null;
         matches = await Matches(name);
+        setTimeout(() => {
+            tooltip.update();
+        })
     }
 
 </script>

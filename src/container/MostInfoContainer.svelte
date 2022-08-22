@@ -4,6 +4,8 @@
     import {MostInfo as getMostInfo} from "../lib/_api";
     import type {ChampionWinRate, MostChampion} from "../lib/models";
     import {onMount} from "svelte";
+    import Tooltip from "../component/Tooltip.svelte";
+    declare const tooltip;
 
     export let mostInfo: MostInfo;
     export let name: string;
@@ -30,6 +32,10 @@
         selectedTab = tab;
         mostInfo = null;
         await mostInfoInit();
+
+        setTimeout(() => {
+            tooltip.update();
+        })
     }
 
     const championRate = (champion: MostChampion) => {
@@ -369,17 +375,25 @@
                         </div>
                         <div class="kda">
                             <div class="" style="position: relative;">
-                                <div class="rate" style="color: {championKdaColor(champion)};">{championRate(champion)}: 1 평점</div>
+                                <div class="rate" style="color: {championKdaColor(champion)};">
+                                    <Tooltip tooltip={'(K '+championKills(champion)+'+ A '+championAssists(champion)+') / D '+championDeaths(champion)}>
+                                        {championRate(champion)}: 1 평점
+                                    </Tooltip>
+                                </div>
                             </div>
                             <div class="detail">
                                 {championKills(champion)} /
-                                {championAssists(champion)} /
-                                {championDeaths(champion)}
+                                {championDeaths(champion)} /
+                                {championAssists(champion)}
                             </div>
                         </div>
                         <div class="played">
                             <div class="" style="position: relative;">
-                                <div class="rate" style="color: {championWinsRateColor(champion)}">{championWinsRate(champion)}%</div>
+                                <div class="rate" style="color: {championWinsRateColor(champion)}">
+                                    <Tooltip tooltip="승률">
+                                        {championWinsRate(champion)}%
+                                    </Tooltip>
+                                </div>
                             </div>
                             <div class="count">{champion.games} 게임</div>
                         </div>

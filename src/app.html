@@ -5,12 +5,15 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link rel="stylesheet" href="%sveltekit.assets%/styles/global.scss" />
 		<link rel="stylesheet" href="%sveltekit.assets%/library/djchart/dj.scss" />
+		<link rel="stylesheet" href="%sveltekit.assets%/library/tooltip/tooltip.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-applesdgothicneo/css/all.css" />
 		<script type="text/javascript" src="%sveltekit.assets%/library/djchart/index.js"></script>
+		<script type="text/javascript" src="%sveltekit.assets%/library/tooltip/tooltip.js"></script>
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
 	</head>
 	<body>
 		<div>%sveltekit.body%</div>
+		<div class="tooltip-container no-display" role="alertdialog" id="tooltipText" aria-hidden="true" aria-live="polite"></div>
 	</body>
 </html>

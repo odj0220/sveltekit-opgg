@@ -5,13 +5,16 @@
     import type {ServerLoad} from "../../../lib/models";
     import MostInfoContainer from "../../../container/MostInfoContainer.svelte";
     import MatchesContainer from "../../../container/MatchesContainer.svelte";
+    import {items as gameItems} from "../../../lib/stores";
 
     /** @type {import('./$types').PageData} */
     export let data: ServerLoad;
-    console.log(data);
-    let {summoner, mostInfo, matches} = data;
+    let {summoner, mostInfo, matches, items} = data;
     let name = $page.params.name;
     let findName = '';
+    gameItems.set(items);
+    console.log(data);
+
 
     function handleSubmit() {
         if (findName) {
