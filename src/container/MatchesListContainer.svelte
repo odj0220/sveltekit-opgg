@@ -1,6 +1,7 @@
 <script lang="ts">
     import type {GameInfo, GameTypes, Matches} from "../lib/models";
     import {getTimeStringSeconds, timeForToday} from "../lib/_util";
+    import Tooltip from "../component/Tooltip.svelte";
 
     export let matches: Matches;
     export let selectedType: GameTypes;
@@ -474,7 +475,7 @@
                             <ul>
                                 {#each Array(6) as _, index (index)}
                                     <li>
-                                        {#if game.items[index]}
+                                        {#if game.items.length - 1 > index}
                                             <div style="position:relative">
                                                 <img src={game.items[index].imageUrl}>
                                             </div>
@@ -484,15 +485,15 @@
                             </ul>
                             <div>
                                 <div class="ward">
-                                    <div style="position:relative" class=""><img
-                                            src="https://opgg-static.akamaized.net/images/lol/item/3364.png?image=q_auto,f_webp,w_auto&amp;v=1660889005277"
-                                            alt="예언자의 렌즈"></div>
+                                    <div style="position:relative" class="">
+                                        <img src={game.items[game.items.length - 1].imageUrl}>
+                                    </div>
                                 </div>
                                 <div class="build">
                                     <div style="position:relative" class="">
-                                        <button>
+                                        <Tooltip tooltip="빌드">
                                             <img src={getBuildIcon(game.isWin)} alt="build">
-                                        </button>
+                                        </Tooltip>
                                     </div>
                                 </div>
                             </div>

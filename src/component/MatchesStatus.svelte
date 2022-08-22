@@ -1,6 +1,7 @@
 <script lang="ts">
     import type {Champion, Matches, Position} from "../lib/models";
     import {onMount} from "svelte";
+    import Tooltip from "./Tooltip.svelte";
     declare const djchart;
 
     onMount(() => {
@@ -397,7 +398,9 @@
                                 <div class="name">{champions[index].name}</div>
                                 <div class="win-lose">
                                     <div style="position: relative; display: inline; color: {winsRatioColor(+championWinsRate(champions[index]))};">
-                                        <b>{championWinsRate(champions[index])}%</b>
+                                        <Tooltip tooltip="승률">
+                                            <b>{championWinsRate(champions[index])}%</b>
+                                        </Tooltip>
                                     </div>
                                     ({champions[index].wins}승 {champions[index].losses}패)
                                 </div>
@@ -428,7 +431,13 @@
             <td class="kda">
                 <div class="k-d-a"><span>{avgKill}</span> / <span class="death">{avgDeath}</span> / <span>{avgAssist}</span></div>
                 <div class="ratio"><span class="kda-ratio" style="color: {kdaRatioColor(+kdaRatio)}">{kdaRatio}:1</span>
-                    <div class="participantion"><span class="kill-participantion" style="color: {winsRatioColor(+winsRatio)};">({winsRatio}%)</span></div>
+                    <div class="participantion">
+                        <Tooltip tooltip="승률">
+                            <span class="kill-participantion" style="color: {winsRatioColor(+winsRatio)};">
+                                ({winsRatio}%)
+                            </span>
+                        </Tooltip>
+                    </div>
                 </div>
             </td>
             <td class="position-stats">
