@@ -17,13 +17,8 @@
     gameItems.set(items);
 
     onMount(() => {
-        console.log('set');
         setLatest(name);
     });
-
-
-    console.log(data);
-
 
 
 </script>
