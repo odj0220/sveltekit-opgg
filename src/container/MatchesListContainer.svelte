@@ -438,7 +438,7 @@
                 <div class="info">
                     <div class="type">{game.gameType}</div>
                     <div style="position:relative" class="">
-                        <div class="time-stamp">{timeForToday(game.createDate)}</div>
+                        <div class="time-stamp">{timeForToday(game.createDate * 1000)}</div>
                     </div>
                     <div class="bar"></div>
                     <div class="game-result">{game.isWin ? '승리' : '패배'}</div>
